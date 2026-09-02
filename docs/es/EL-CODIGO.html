@@ -1,0 +1,100 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El código — Hyper Rally (Konami, 1985)</title>
+<style>
+:root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
+  --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
+@media (prefers-color-scheme:light){:root{--tinta:#191a1e;--suave:#5a5d66;--fondo:#e9e7e1;
+  --panel:#f7f6f2;--linea:#d0cdc5;--rojo:#b23f34;--cyan:#1c6b7c;--verde:#2b7734;--oro:#8a7420}}
+:root[data-theme="dark"]{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;
+  --linea:#23262e;--rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
+:root[data-theme="light"]{--tinta:#191a1e;--suave:#5a5d66;--fondo:#e9e7e1;--panel:#f7f6f2;
+  --linea:#d0cdc5;--rojo:#b23f34;--cyan:#1c6b7c;--verde:#2b7734;--oro:#8a7420}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);padding:0 1.25rem 6rem;
+  font:15px/1.7 ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.w{max-width:1120px;margin:0 auto}
+.n{max-width:68ch}
+h1,h2,h3,h4{font-weight:400;text-wrap:balance}
+a{color:var(--cyan)}
+img{image-rendering:pixelated;max-width:100%;height:auto;display:block}
+header.top{display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  padding:4rem 0 2rem;text-align:center}
+header.top img{width:min(100%,642px)}
+.claim{max-width:60ch;color:var(--suave);font-size:1.05rem}
+.claim b{color:var(--tinta);font-weight:400}
+.ficha{display:flex;flex-wrap:wrap;justify-content:center;gap:0 1.5rem;width:100%;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);
+  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:.85rem 0}
+.ficha b{color:var(--rojo);font-weight:400}
+nav{display:flex;flex-wrap:wrap;gap:1.25rem;justify-content:center;padding:1.25rem 0;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+nav a{color:var(--suave);text-decoration:none;border-bottom:1px solid transparent}
+nav a:hover,nav a:focus{color:var(--tinta);border-bottom-color:var(--rojo)}
+nav.docs{border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);
+  margin-bottom:1rem}
+section{margin-top:4.5rem;scroll-margin-top:1rem}
+section>h2{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;
+  border-left:3px solid var(--rojo);padding-left:.9rem;margin:0 0 1.5rem}
+.cifras{display:grid;gap:1px;background:var(--linea);border:1px solid var(--linea);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.cifra{background:var(--panel);padding:1.1rem}
+.cifra b{display:block;font-size:1.7rem;color:var(--oro);font-weight:400;
+  font-variant-numeric:tabular-nums;line-height:1.2}
+.cifra span{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--suave)}
+.hall{border-top:1px solid var(--linea);padding-top:1.75rem;margin-top:2.5rem}
+.hall:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.hall h3{margin:0 0 .75rem;font-size:1.15rem;color:var(--rojo)}
+.hall h4{color:var(--oro);margin:1.5rem 0 .5rem;font-size:.95rem}
+.hall p{margin:0 0 1rem}
+pre.asm{background:var(--panel);border-left:2px solid var(--verde);margin:1.25rem 0;
+  padding:1rem 1.1rem;overflow-x:auto;font-size:13px;line-height:1.6;color:var(--tinta)}
+.par{display:grid;gap:1.25rem;grid-template-columns:1fr}
+@media(min-width:820px){.par{grid-template-columns:1fr 1fr}}
+.par figure{margin:0}
+table{border-collapse:collapse;width:100%;margin:1.25rem 0;font-size:13px;display:block;
+  overflow-x:auto}
+th,td{text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--linea)}
+th{color:var(--suave);font-weight:400;font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+td.num{font-variant-numeric:tabular-nums;color:var(--oro)}
+.nivel{margin-top:2rem}
+.nivel h3{margin:0 0 .9rem;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase}
+.nivel em{color:var(--cyan);font-style:normal}
+.sep{color:var(--suave);margin:0 .6rem}
+.rejilla{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.rejilla figure{margin:0;background:var(--panel);box-shadow:0 0 0 1px var(--linea)}
+.rejilla figcaption{display:flex;justify-content:space-between;padding:.45rem .65rem;
+  font-size:11px;color:var(--suave);border-top:1px solid var(--linea)}
+.dir{font-variant-numeric:tabular-nums;color:var(--verde)}
+footer{margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--linea);
+  color:var(--suave);font-size:12px}
+
+/* Aviso de trabajo en curso: tiene que verse antes que las cifras, porque un
+   100% mal leido hace mas dano que no ponerlo. */
+.aviso{background:#3a2a10;border-left:3px solid var(--oro);margin:1.5rem auto;
+  padding:1rem 1.2rem;max-width:900px;border-radius:4px}
+.aviso p{margin:0;color:var(--tinta);font-size:15px;line-height:1.65}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;margin:1.5rem 0}
+.galeria figure{margin:0}
+.galeria img{width:100%;height:auto;image-rendering:pixelated;
+  border:1px solid var(--linea);border-radius:3px}
+.galeria figcaption{color:var(--suave);font-size:13px;margin-top:.5rem}
+audio{display:block;width:100%;max-width:640px;margin:.75rem 0 1.5rem}
+</style>
+<div class="w"><nav class="top"><a href="index.html">Portada</a><a href="EMPEZAR.html">Empezar</a><a href="EL-JUEGO.html">El juego</a><a href="EL-CARTUCHO.html">El cartucho</a><a href="EL-CODIGO.html" style=color:var(--tinta)>El código</a><a href="HALLAZGOS.html">Hallazgos</a><a href="EN-EL-EMULADOR.html">En el emulador</a><a href="PREGUNTAS-ABIERTAS.html">Preguntas abiertas</a><a href="../THE-CODE.html" style="margin-left:auto;color:var(--oro)">English</a></nav>
+<h1 id="el-codigo">El código</h1>
+<h2 id="un-bucle-muerto-y-toda-la-maquina-en-la-interrupcion">Un bucle muerto, y toda la máquina en la interrupción</h2>
+<p>INIT (0x4053) pone un <code>0xC3</code> en H.KEYI y la dirección <b>0x4010</b> detrás, borra los 0x7FE bytes de 0xE000 a 0xE7FF con un <code>ldir</code> y deja la pila justo debajo. A partir de ahí el programa principal no hace nada: el juego entero corre dentro de la interrupción de cada cuadro.</p>
+<h2 id="una-rutina-que-lee-su-propio-parametro">Una rutina que lee su propio parámetro</h2>
+<p>0x4379 empieza con <code>ex (sp),hl</code>: coge la dirección de retorno —que apunta al byte de después del CALL—, lee de ahí una palabra de dieciséis bits, y devuelve la dirección ya avanzada para volver <b>detrás</b> del parámetro. O sea que el parámetro va <b>pegado al CALL, dentro del flujo de código</b>.</p>
+<p>Hay trece llamadas así, y las trece palabras apuntan dentro de la ROM. Este detalle es el que hace que un desensamblador ingenuo se pierda: el primer parámetro es 0x44E9, y su byte bajo, un <code>0xE9</code>, se lee como un <code>jp (hl)</code> que no existe.</p>
+<h2 id="el-interprete-de-guiones">El intérprete de guiones</h2>
+<p>Casi todo lo que se dibuja va comprimido y lo vuelca un mismo intérprete (0x4380 / 0x4389). El formato, medido:</p>
+<ul><li>cabecera de dos bytes con el destino, <b>byte alto primero</b></li><li><code>0x01 rl</code> — UN byte con dos nibbles: el bajo dice cuántos bytes tiene el bloque y el alto cuántas veces se repite (un 0 vale por 256)</li><li><code>0x02..0x7F</code> — racha: repite el byte siguiente</li><li><code>0x81..0xFF</code> — literal: copia tantos bytes</li><li><code>0x80</code> — cambio de destino</li><li><code>0x00</code> — fin</li></ul>
+<p>Y hay una segunda puerta, en 0x601E, que lee <b>el mismo formato pero contra la RAM</b>. Gracias a eso 0x5FE2 puede pintar un tile del campo y después el <b>mismo tile espejado de izquierda a derecha</b> (0x5FFD), sin gastar un byte más de ROM. No es una trasposición aunque lo parezca: el <code>inc hl</code> de 0x600E está fuera del bucle de bits, así que las ocho vueltas de <code>rl (hl)</code> giran siempre el mismo byte y lo que sale es esa fila con los bits del revés. El remate es que 0x6013 y 0x601B le ponen delante un <code>0x88</code> y detrás un <code>0x00</code>, con lo que la fila espejada sale ya convertida en un guión de VRAM que pinta la misma rutina.</p>
+<h2 id="los-hoyos">Los hoyos</h2>
+<p>Dos tablas de nueve punteros, en 0x79BC y 0x79CE. La primera lleva a la cabecera del hoyo y la segunda a su rejilla, pero no hace falta usar las dos: la cabecera termina en un <code>0x80</code> cuyo destino es el principio de la rejilla.</p>
+<p>Cada casilla de la rejilla es un código que se dibuja como un bloque de cuatro tiles de ancho por dos o cuatro de alto, sobre un lienzo de 20 por 16 en RAM, en cinco bandas de profundidad. Los códigos 0x01 a 0x28 van por unas tablas y los 0x29 a 0x34 por otras; el 0xEA es el tee, el 0xC4 el borde, y el 0x29 y el 0x2A son el green. El tipo de terreno lo clasifica 0x5BF0 con unos umbrales, y es lo que decide si el golpe sale a medias.</p>
+<p>Y para poder mirar el hoyo desde cuatro ángulos, tres tablas de 48 códigos (0x5471, 0x54A1 y 0x54D1) <b>giran los códigos de casilla</b>, y el juego mantiene cuatro rejillas: una sin girar, dos giradas y una del revés.</p>
+<footer><p><em>Hyper Rally</em> lo publico Konami para MSX; su numero de catalogo es RC-718 y son 16 KB. Todos los derechos sobre el juego siguen siendo de sus titulares. Este trabajo es de preservacion, estudio y documentacion, y la imagen del cartucho no se distribuye.</p></footer></div>

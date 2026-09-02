@@ -1,0 +1,106 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Preguntas abiertas — Hyper Rally (Konami, 1985)</title>
+<style>
+:root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
+  --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
+@media (prefers-color-scheme:light){:root{--tinta:#191a1e;--suave:#5a5d66;--fondo:#e9e7e1;
+  --panel:#f7f6f2;--linea:#d0cdc5;--rojo:#b23f34;--cyan:#1c6b7c;--verde:#2b7734;--oro:#8a7420}}
+:root[data-theme="dark"]{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;
+  --linea:#23262e;--rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
+:root[data-theme="light"]{--tinta:#191a1e;--suave:#5a5d66;--fondo:#e9e7e1;--panel:#f7f6f2;
+  --linea:#d0cdc5;--rojo:#b23f34;--cyan:#1c6b7c;--verde:#2b7734;--oro:#8a7420}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);padding:0 1.25rem 6rem;
+  font:15px/1.7 ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.w{max-width:1120px;margin:0 auto}
+.n{max-width:68ch}
+h1,h2,h3,h4{font-weight:400;text-wrap:balance}
+a{color:var(--cyan)}
+img{image-rendering:pixelated;max-width:100%;height:auto;display:block}
+header.top{display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  padding:4rem 0 2rem;text-align:center}
+header.top img{width:min(100%,642px)}
+.claim{max-width:60ch;color:var(--suave);font-size:1.05rem}
+.claim b{color:var(--tinta);font-weight:400}
+.ficha{display:flex;flex-wrap:wrap;justify-content:center;gap:0 1.5rem;width:100%;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);
+  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:.85rem 0}
+.ficha b{color:var(--rojo);font-weight:400}
+nav{display:flex;flex-wrap:wrap;gap:1.25rem;justify-content:center;padding:1.25rem 0;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+nav a{color:var(--suave);text-decoration:none;border-bottom:1px solid transparent}
+nav a:hover,nav a:focus{color:var(--tinta);border-bottom-color:var(--rojo)}
+nav.docs{border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);
+  margin-bottom:1rem}
+section{margin-top:4.5rem;scroll-margin-top:1rem}
+section>h2{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;
+  border-left:3px solid var(--rojo);padding-left:.9rem;margin:0 0 1.5rem}
+.cifras{display:grid;gap:1px;background:var(--linea);border:1px solid var(--linea);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.cifra{background:var(--panel);padding:1.1rem}
+.cifra b{display:block;font-size:1.7rem;color:var(--oro);font-weight:400;
+  font-variant-numeric:tabular-nums;line-height:1.2}
+.cifra span{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--suave)}
+.hall{border-top:1px solid var(--linea);padding-top:1.75rem;margin-top:2.5rem}
+.hall:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.hall h3{margin:0 0 .75rem;font-size:1.15rem;color:var(--rojo)}
+.hall h4{color:var(--oro);margin:1.5rem 0 .5rem;font-size:.95rem}
+.hall p{margin:0 0 1rem}
+pre.asm{background:var(--panel);border-left:2px solid var(--verde);margin:1.25rem 0;
+  padding:1rem 1.1rem;overflow-x:auto;font-size:13px;line-height:1.6;color:var(--tinta)}
+.par{display:grid;gap:1.25rem;grid-template-columns:1fr}
+@media(min-width:820px){.par{grid-template-columns:1fr 1fr}}
+.par figure{margin:0}
+table{border-collapse:collapse;width:100%;margin:1.25rem 0;font-size:13px;display:block;
+  overflow-x:auto}
+th,td{text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--linea)}
+th{color:var(--suave);font-weight:400;font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+td.num{font-variant-numeric:tabular-nums;color:var(--oro)}
+.nivel{margin-top:2rem}
+.nivel h3{margin:0 0 .9rem;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase}
+.nivel em{color:var(--cyan);font-style:normal}
+.sep{color:var(--suave);margin:0 .6rem}
+.rejilla{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.rejilla figure{margin:0;background:var(--panel);box-shadow:0 0 0 1px var(--linea)}
+.rejilla figcaption{display:flex;justify-content:space-between;padding:.45rem .65rem;
+  font-size:11px;color:var(--suave);border-top:1px solid var(--linea)}
+.dir{font-variant-numeric:tabular-nums;color:var(--verde)}
+footer{margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--linea);
+  color:var(--suave);font-size:12px}
+
+/* Aviso de trabajo en curso: tiene que verse antes que las cifras, porque un
+   100% mal leido hace mas dano que no ponerlo. */
+.aviso{background:#3a2a10;border-left:3px solid var(--oro);margin:1.5rem auto;
+  padding:1rem 1.2rem;max-width:900px;border-radius:4px}
+.aviso p{margin:0;color:var(--tinta);font-size:15px;line-height:1.65}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;margin:1.5rem 0}
+.galeria figure{margin:0}
+.galeria img{width:100%;height:auto;image-rendering:pixelated;
+  border:1px solid var(--linea);border-radius:3px}
+.galeria figcaption{color:var(--suave);font-size:13px;margin-top:.5rem}
+audio{display:block;width:100%;max-width:640px;margin:.75rem 0 1.5rem}
+</style>
+<div class="w"><nav class="top"><a href="index.html">Portada</a><a href="EMPEZAR.html">Empezar</a><a href="EL-JUEGO.html">El juego</a><a href="EL-CARTUCHO.html">El cartucho</a><a href="EL-CODIGO.html">El código</a><a href="HALLAZGOS.html">Hallazgos</a><a href="EN-EL-EMULADOR.html">En el emulador</a><a href="PREGUNTAS-ABIERTAS.html" style=color:var(--tinta)>Preguntas abiertas</a><a href="../OPEN-QUESTIONS.html" style="margin-left:auto;color:var(--oro)">English</a></nav>
+<h1 id="preguntas-abiertas">Preguntas abiertas</h1>
+<p>Lo que no está cerrado, dicho tal cual. Nada de esto se ha rellenado a ojo.</p>
+<h2 id="un-posible-fallo-que-no-se-ha-comprobado">Un posible fallo que no se ha comprobado</h2>
+<p>En 0x57EC hay cuatro bytes —0x28, 0x50, 0xA0 y 0xF0— que son las fronteras entre las cinco bandas de profundidad del lienzo. 0x55B6 los indexa con el número de banda menos uno; pero la banda llega a valer <b>5</b>, con lo que el índice 4 <b>se sale de la tabla</b> y lee el 0x3A que ya es la instrucción de 0x57F0.</p>
+<p>Puede ser inofensivo —0xE4C0 + 0x3A sigue cayendo dentro del lienzo— o puede ser un fallo del cartucho. <b>No se ha comprobado en el emulador</b>, así que aquí se queda como lo que es: una sospecha medida, no un hallazgo.</p>
+<h2 id="dos-sprites-al-mismo-sitio-en-el-green">Dos sprites al mismo sitio, en el green</h2>
+<p>Cuando los dos están en el green y las bolas caen a menos de tres píxeles, 0x551F hace esto:</p>
+<pre><code>push de              ; DE viene con 0xE1C0, el marcador del tee
+ld de,07b30h         ; el atributo del sprite 12
+call vuelca_cuatro_bytes   ; 0xE0B0, la bola -&gt; sprite 12
+pop hl
+call vuelca_cuatro_bytes   ; 0xE1C0, el marcador -&gt; sprite 12 OTRA VEZ</code></pre>
+<p><code>vuelca_cuatro_bytes</code> <b>no toca DE</b>: sólo avanza HL. Así que la segunda llamada vuelve a abrir la VRAM en 0x3B30 y <b>escribe encima de lo que acaba de poner la primera</b>. La bola se pierde debajo del marcador, y el primer volcado es trabajo tirado. Un <code>inc de</code> de más —o un 0x3B34— y serían dos sprites distintos.</p>
+<p>Puede ser un descuido del cartucho o puede que en pantalla dé igual, porque las dos fichas están a menos de tres píxeles y el sprite que queda tapa al otro de todos modos. <b>No se ha comprobado en el emulador</b>: se queda como lo que es, una sospecha medida sobre el código.</p>
+<h2 id="codigo-al-que-no-salta-nadie">Código al que no salta nadie</h2>
+<p>Los seis bytes de 0x6E70 son código válido —<code>ld a,c / neg / ld c,a / jr</code>—, gemelos de los de 0x6E6A que hacen lo mismo con B. Los tres <code>jr</code> de alrededor apuntan más allá. No se ha encontrado ningún camino que los alcance.</p>
+<h2 id="la-vista-en-perspectiva-no-esta-dibujada">La vista en perspectiva no está dibujada</h2>
+<p>De las imágenes de la web faltan las de la pantalla de juego: la vista del hoyo desde detrás de la bola. Las piezas están: el lienzo de 20 por 16 en 0xE4C0, los 54 códigos de casilla y los bloques con que se apilan a cinco distancias, todo dibujado en <code>bloques.png</code>. Lo que falta es la cadena que sitúa la bola en el tee —0x4850, luego <code>donde_esta_la_bola</code> (0x5A2A) y <code>elige_la_rejilla</code> (0x5AA5) con la franja de 0x5B1D— para saber <b>cuál de las cuatro rejillas se mira y desde qué casilla</b>. Se paró antes de inventarlo.</p>
+<h2 id="que-dibuja-cada-tile-del-campo-con-su-nombre">Qué dibuja cada tile del campo, con su nombre</h2>
+<p>Los 256 tiles y los 54 códigos de casilla <b>ya están dibujados</b> desde la ROM, y se pueden mirar en <code>tiles.png</code> y <code>bloques.png</code>. Lo que sigue sin hacer es menor: ponerle nombre a cada uno —cuál es el árbol, cuál el borde del búnker— en los tramos <code>tiles_girables_1..6</code> y <code>colores_del_campo_1..10</code> del listado. Están situados y decodifican limpio; lo que no tienen es etiqueta propia.</p>
+<footer><p><em>Hyper Rally</em> lo publico Konami para MSX; su numero de catalogo es RC-718 y son 16 KB. Todos los derechos sobre el juego siguen siendo de sus titulares. Este trabajo es de preservacion, estudio y documentacion, y la imagen del cartucho no se distribuye.</p></footer></div>

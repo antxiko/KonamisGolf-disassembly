@@ -1,0 +1,22 @@
+# Zonas que NO son codigo aunque el trazado pueda entrar en ellas.
+#
+# PARAMETROS EN LINEA DE 0x4379. Esa rutina empieza con `ex (sp),hl` y lee una
+# palabra de 16 bits de justo despues del CALL que la llamo, o sea que el
+# parametro va PEGADO al CALL, dentro del flujo de codigo. Hay que declararlo
+# como datos para que el trazado no lo lea como instrucciones: si no, el 0xE9
+# de la primera (0x40C6, byte bajo de 0x44E9) se lee como un `jp (hl)`.
+#
+# Las trece llamadas comprobadas: las trece palabras caen dentro de la ROM.
+0x40C6 0x40C8   # parametro del call de 0x40C3: apunta a 0x44E9
+0x40D7 0x40D9   # parametro del call de 0x40D4: apunta a 0x4782
+0x419F 0x41A1   # parametro del call de 0x419C: apunta a 0x47D1
+0x4844 0x4846   # parametro del call de 0x4841: apunta a 0x4D27
+0x484E 0x4850   # parametro del call de 0x484B: apunta a 0x4D33
+0x498C 0x498E   # parametro del call de 0x4989: apunta a 0x7699
+0x4B47 0x4B49   # parametro del call de 0x4B44: apunta a 0x4ED8
+0x4B57 0x4B59   # parametro del call de 0x4B54: apunta a 0x4EE6
+0x4B66 0x4B68   # parametro del call de 0x4B63: apunta a 0x4EF4
+0x4BE4 0x4BE6   # parametro del call de 0x4BE1: apunta a 0x4EF4
+0x55F6 0x55F8   # parametro del call de 0x55F3: apunta a 0x7FEF
+0x5714 0x5716   # parametro del call de 0x5711: apunta a 0x4815
+0x5909 0x590B   # parametro del call de 0x5906: apunta a 0x6B3D

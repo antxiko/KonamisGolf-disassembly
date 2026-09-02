@@ -1,0 +1,37 @@
+# Puntos de entrada de Konami's Golf (Konami, RC-723, 1985). ROM de 16 KB en 0x4000.
+#
+# La BIOS lee la cabecera "AB" y llama a INIT tras inicializar la maquina.
+# Comprobado en el volcado: los bytes 0-9 son 41 42 53 40 00 00 00 00 00 00, o
+# sea que declara SOLO INIT, y esta en 0x4053 -no en 0x4010, que es donde lo
+# ponen otros cartuchos de la casa-.
+0x4053   # INIT, declarado en la cabecera del cartucho (bytes 2-3: 53 40)
+
+# INIT engancha la interrupcion: pone un 0xC3 (jp) en H.KEYI (0xFD9A) y la
+# direccion 0x4010 detras -`ld hl,04010h / ld (0FD9Bh),hl` en 0x4059-, luego
+# borra 0xE000-0xE7FF con un ldir y pone la pila. Asi que todo el juego cuelga
+# de la interrupcion y el trazado estatico no puede llegar solo.
+0x4010   # manejador de la interrupcion, enganchado en H.KEYI por INIT (0x4059)
+
+# === Las trece continuaciones tras un parametro en linea ===
+#
+# 0x4379 empieza con `ex (sp),hl` y lee una palabra de 16 bits de JUSTO DESPUES
+# del CALL: es un parametro en linea. O sea que cada `call 0x4379` va seguido de
+# DOS BYTES DE DATOS y la ejecucion sigue dos bytes mas alla; el trazado no
+# puede saberlo y por eso leia el byte bajo de la primera palabra (0x40C6, un
+# 0xE9) como un `jp (hl)`.
+#
+# Comprobado en las TRECE llamadas que hay: las trece palabras caen dentro de la
+# ROM, cero excepciones.
+0x40c8   # sigue tras el parametro en linea 0x44E9 del call de 0x40C3
+0x40d9   # sigue tras el parametro en linea 0x4782 del call de 0x40D4
+0x41a1   # sigue tras el parametro en linea 0x47D1 del call de 0x419C
+0x4846   # sigue tras el parametro en linea 0x4D27 del call de 0x4841
+0x4850   # sigue tras el parametro en linea 0x4D33 del call de 0x484B
+0x498e   # sigue tras el parametro en linea 0x7699 del call de 0x4989
+0x4b49   # sigue tras el parametro en linea 0x4ED8 del call de 0x4B44
+0x4b59   # sigue tras el parametro en linea 0x4EE6 del call de 0x4B54
+0x4b68   # sigue tras el parametro en linea 0x4EF4 del call de 0x4B63
+0x4be6   # sigue tras el parametro en linea 0x4EF4 del call de 0x4BE1
+0x55f8   # sigue tras el parametro en linea 0x7FEF del call de 0x55F3
+0x5716   # sigue tras el parametro en linea 0x4815 del call de 0x5711
+0x590b   # sigue tras el parametro en linea 0x6B3D del call de 0x5906
