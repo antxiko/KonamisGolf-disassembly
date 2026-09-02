@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Open questions — Hyper Rally (Konami, 1985)</title>
+<title>Open questions — Konami&#x27;s Golf (Konami, 1985)</title>
 <style>
 :root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
   --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
@@ -103,4 +103,4 @@ call vuelca_cuatro_bytes   ; 0xE1C0, the marker -&gt; sprite 12 AGAIN</code></pr
 <p>The gameplay screen is missing from the pictures on this site: the view of the hole from behind the ball. The pieces are there — the 20 by 16 canvas at 0xE4C0, the 54 cell codes and the blocks they are stacked from at five distances, all drawn in <code>bloques.png</code>. What is missing is the chain that puts the ball on the tee — 0x4850, then <code>donde_esta_la_bola</code> (0x5A2A) and <code>elige_la_rejilla</code> (0x5AA5) with the strip at 0x5B1D — to know <b>which of the four grids is being looked at and from which cell</b>. We stopped rather than invent it.</p>
 <h2 id="what-each-course-tile-draws-by-name">What each course tile draws, by name</h2>
 <p>All 256 tiles and the 54 cell codes <b>are now drawn</b> from the ROM, and can be looked at in <code>tiles.png</code> and <code>bloques.png</code>. What is still undone is smaller: naming each one — which is the tree, which the bunker&#x27;s edge — across the <code>tiles_girables_1..6</code> and <code>colores_del_campo_1..10</code> stretches of the listing. They are placed and they decode cleanly; what they lack is a label of their own.</p>
-<footer><p><em>Hyper Rally</em> was published by Konami for the MSX; its catalogue number is RC-718 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>
+<footer><p><em>Konami's Golf</em> was published by Konami for the MSX; its catalogue number is RC-723 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>

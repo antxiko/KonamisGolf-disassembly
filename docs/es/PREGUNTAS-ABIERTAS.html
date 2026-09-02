@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Preguntas abiertas — Hyper Rally (Konami, 1985)</title>
+<title>Preguntas abiertas — Konami&#x27;s Golf (Konami, 1985)</title>
 <style>
 :root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
   --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
@@ -103,4 +103,4 @@ call vuelca_cuatro_bytes   ; 0xE1C0, el marcador -&gt; sprite 12 OTRA VEZ</code>
 <p>De las imágenes de la web faltan las de la pantalla de juego: la vista del hoyo desde detrás de la bola. Las piezas están: el lienzo de 20 por 16 en 0xE4C0, los 54 códigos de casilla y los bloques con que se apilan a cinco distancias, todo dibujado en <code>bloques.png</code>. Lo que falta es la cadena que sitúa la bola en el tee —0x4850, luego <code>donde_esta_la_bola</code> (0x5A2A) y <code>elige_la_rejilla</code> (0x5AA5) con la franja de 0x5B1D— para saber <b>cuál de las cuatro rejillas se mira y desde qué casilla</b>. Se paró antes de inventarlo.</p>
 <h2 id="que-dibuja-cada-tile-del-campo-con-su-nombre">Qué dibuja cada tile del campo, con su nombre</h2>
 <p>Los 256 tiles y los 54 códigos de casilla <b>ya están dibujados</b> desde la ROM, y se pueden mirar en <code>tiles.png</code> y <code>bloques.png</code>. Lo que sigue sin hacer es menor: ponerle nombre a cada uno —cuál es el árbol, cuál el borde del búnker— en los tramos <code>tiles_girables_1..6</code> y <code>colores_del_campo_1..10</code> del listado. Están situados y decodifican limpio; lo que no tienen es etiqueta propia.</p>
-<footer><p><em>Hyper Rally</em> lo publico Konami para MSX; su numero de catalogo es RC-718 y son 16 KB. Todos los derechos sobre el juego siguen siendo de sus titulares. Este trabajo es de preservacion, estudio y documentacion, y la imagen del cartucho no se distribuye.</p></footer></div>
+<footer><p><em>Konami's Golf</em> lo publico Konami para MSX; su numero de catalogo es RC-723 y son 16 KB. Todos los derechos sobre el juego siguen siendo de sus titulares. Este trabajo es de preservacion, estudio y documentacion, y la imagen del cartucho no se distribuye.</p></footer></div>

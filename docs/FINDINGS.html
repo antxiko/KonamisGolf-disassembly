@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Findings — Hyper Rally (Konami, 1985)</title>
+<title>Findings — Konami&#x27;s Golf (Konami, 1985)</title>
 <style>
 :root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
   --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
@@ -101,4 +101,4 @@ audio{display:block;width:100%;max-width:640px;margin:.75rem 0 1.5rem}
 <p>And that same difference gives the size it is drawn at. 0x7074 does <code>ld a,(0xE0B0) / sub d</code> — the lower layer&#x27;s <em>y</em> minus the upper one&#x27;s — and compares it against <b>0x21, 0x0F and 0x06</b>: four ball sizes, from the fattest to the smallest. The higher it flies, the smaller it looks. On landing, 0x701B brings the two layers back together and the height is zero again.</p>
 <h2 id="a-single-curve-for-both-sine-and-cosine">A single curve for both sine and cosine</h2>
 <p>The shot&#x27;s direction does not use two tables: it uses <b>one 66-byte curve</b> at 0x52BF, read at two points 0x21 apart. Cosine and sine are the same table, offset.</p>
-<footer><p><em>Hyper Rally</em> was published by Konami for the MSX; its catalogue number is RC-718 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>
+<footer><p><em>Konami's Golf</em> was published by Konami for the MSX; its catalogue number is RC-723 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>

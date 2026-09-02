@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The game — Hyper Rally (Konami, 1985)</title>
+<title>The game — Konami&#x27;s Golf (Konami, 1985)</title>
 <style>
 :root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
   --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
@@ -99,4 +99,4 @@ audio{display:block;width:100%;max-width:640px;margin:.75rem 0 1.5rem}
 <p>It is rolled at the start of each hole with <code>ld a,r</code>: a strength from 1 to 8 and one of four directions, painted on the panel&#x27;s WIND row.</p>
 <p>What it does is not push <b>harder</b>, but <b>more often</b>. Every nudge is the same size; what changes is how many frames apart they arrive. 0x6C4C reloads the 0xE03C countdown with <b>20 if the club is a wood</b> — the 1W or the 3W, the first two — and with <b>10 for anything else</b>, then subtracts the wind strength from that. At wind 8, an iron gets a nudge every 2 counted frames and a wood every 12. On top of that the countdown only advances on one frame in four (<code>and 3</code> on the 0xE000 counter), so the real clock is four times slower.</p>
 <p>Put another way: <b>the woods are the clubs that suffer the wind least</b>, which is the opposite of what you would expect from a club that sends the ball high and far.</p>
-<footer><p><em>Hyper Rally</em> was published by Konami for the MSX; its catalogue number is RC-718 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>
+<footer><p><em>Konami's Golf</em> was published by Konami for the MSX; its catalogue number is RC-723 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>

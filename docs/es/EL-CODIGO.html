@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>El código — Hyper Rally (Konami, 1985)</title>
+<title>El código — Konami&#x27;s Golf (Konami, 1985)</title>
 <style>
 :root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
   --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
@@ -97,4 +97,4 @@ audio{display:block;width:100%;max-width:640px;margin:.75rem 0 1.5rem}
 <p>Dos tablas de nueve punteros, en 0x79BC y 0x79CE. La primera lleva a la cabecera del hoyo y la segunda a su rejilla, pero no hace falta usar las dos: la cabecera termina en un <code>0x80</code> cuyo destino es el principio de la rejilla.</p>
 <p>Cada casilla de la rejilla es un código que se dibuja como un bloque de cuatro tiles de ancho por dos o cuatro de alto, sobre un lienzo de 20 por 16 en RAM, en cinco bandas de profundidad. Los códigos 0x01 a 0x28 van por unas tablas y los 0x29 a 0x34 por otras; el 0xEA es el tee, el 0xC4 el borde, y el 0x29 y el 0x2A son el green. El tipo de terreno lo clasifica 0x5BF0 con unos umbrales, y es lo que decide si el golpe sale a medias.</p>
 <p>Y para poder mirar el hoyo desde cuatro ángulos, tres tablas de 48 códigos (0x5471, 0x54A1 y 0x54D1) <b>giran los códigos de casilla</b>, y el juego mantiene cuatro rejillas: una sin girar, dos giradas y una del revés.</p>
-<footer><p><em>Hyper Rally</em> lo publico Konami para MSX; su numero de catalogo es RC-718 y son 16 KB. Todos los derechos sobre el juego siguen siendo de sus titulares. Este trabajo es de preservacion, estudio y documentacion, y la imagen del cartucho no se distribuye.</p></footer></div>
+<footer><p><em>Konami's Golf</em> lo publico Konami para MSX; su numero de catalogo es RC-723 y son 16 KB. Todos los derechos sobre el juego siguen siendo de sus titulares. Este trabajo es de preservacion, estudio y documentacion, y la imagen del cartucho no se distribuye.</p></footer></div>

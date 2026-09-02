@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The code — Hyper Rally (Konami, 1985)</title>
+<title>The code — Konami&#x27;s Golf (Konami, 1985)</title>
 <style>
 :root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
   --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
@@ -97,4 +97,4 @@ audio{display:block;width:100%;max-width:640px;margin:.75rem 0 1.5rem}
 <p>Two tables of nine pointers, at 0x79BC and 0x79CE. The first leads to the hole&#x27;s header and the second to its grid, but you do not need both: the header ends in a <code>0x80</code> whose destination is the start of the grid.</p>
 <p>Each grid cell is a code drawn as a block four tiles wide by two or four tall, onto a 20 by 16 canvas in RAM, in five depth bands. Codes 0x01 to 0x28 go through one set of tables and 0x29 to 0x34 through another; 0xEA is the tee, 0xC4 the edge, and 0x29 and 0x2A are the green. The terrain type is classified by 0x5BF0 against a set of thresholds, and that is what decides whether your shot comes out short.</p>
 <p>And so the hole can be looked at from four angles, three tables of 48 codes (0x5471, 0x54A1 and 0x54D1) <b>rotate the cell codes</b>, with the game keeping four grids: one unrotated, two rotated and one reversed.</p>
-<footer><p><em>Hyper Rally</em> was published by Konami for the MSX; its catalogue number is RC-718 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>
+<footer><p><em>Konami's Golf</em> was published by Konami for the MSX; its catalogue number is RC-723 and it is 16 KB. All rights in the game remain with their holders. This is preservation, study and documentation work, and the cartridge image is not distributed.</p></footer></div>
