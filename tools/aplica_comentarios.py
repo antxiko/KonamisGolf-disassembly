@@ -11,6 +11,9 @@ Lo que se rechaza, y por que:
     de linea colgado de un `defb` no sale por ninguna parte
   - direccion que ya tiene comentario en el .notes: lo escrito a mano manda
   - direcciones repetidas entre tandas: se queda la primera
+  - cabecera de bloque identica -misma direccion y mismo texto- a una que ya
+    esta: el aplicador se corre varias veces por proyecto y sin esto vuelve a
+    meter las mismas cada pasada. En Mopi Ranger habia 1.589 lineas de sobra
   - lineas con caracteres no ASCII: el .notes es ASCII a proposito
 
 Uso: aplica_comentarios.py <asm> <notes> <work/coment> [--escribe]
@@ -20,6 +23,12 @@ import glob
 import os
 import re
 import sys
+
+
+# Una linea de cabecera que solo lleva guiones, iguales o almohadillas es un
+# marco, no un texto: la misma raya se repite arriba y abajo a proposito, asi
+# que esas no se filtran nunca.
+DECORATIVA = re.compile(r"^[-=#*_~+.:\s]*$")
 
 
 def direcciones_del_asm(asm):
@@ -41,10 +50,14 @@ def main(argv):
     instr = direcciones_del_asm(asm)
     texto = open(notes, encoding="utf-8").read()
     ya = set()
+    ya_bloque = set()
     for ln in texto.splitlines():
         m = re.match(r"^C (0x[0-9a-fA-F]{4}) ", ln)
         if m:
             ya.add(int(m.group(1), 16))
+        m = re.match(r"^B (0x[0-9a-fA-F]{4}) +(.*)$", ln)
+        if m:
+            ya_bloque.add((int(m.group(1), 16), m.group(2).rstrip()))
 
     nuevas, visto = [], set()
     n_fuera = n_ya = n_dup = n_mal = 0
@@ -72,6 +85,12 @@ def main(argv):
                     n_dup += 1
                     continue
                 visto.add(dire)
+            elif m.group(1) == "B":
+                clave = (dire, cuerpo.rstrip())
+                if clave in ya_bloque and not DECORATIVA.match(cuerpo):
+                    n_ya += 1
+                    continue
+                ya_bloque.add(clave)
             nuevas.append("%s 0x%04x %s" % (m.group(1), dire, cuerpo))
             cuenta += 1
         print("  %-28s %4d" % (os.path.basename(fn), cuenta))
